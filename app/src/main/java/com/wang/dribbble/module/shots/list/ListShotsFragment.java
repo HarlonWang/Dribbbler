@@ -1,4 +1,4 @@
-package com.wang.dribbble.module.shots;
+package com.wang.dribbble.module.shots.list;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.mikepenz.google_material_typeface_library.GoogleMaterial;
-import com.mikepenz.iconics.IconicsDrawable;
 import com.wang.dribbble.Injection;
 import com.wang.dribbble.R;
 import com.wang.dribbble.data.model.Shots;
 import com.wang.dribbble.module.base.BaseFragment;
-import com.wang.dribbble.module.shotsdetail.ShotsDetailActivity;
+import com.wang.dribbble.module.shots.detail.ShotsDetailActivity;
 import com.wang.dribbble.utils.GridMarginDecoration;
 import com.wang.dribbble.utils.ImageSize;
 
@@ -89,8 +86,8 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         mPresenter.loadListShots(false);
     }
 

@@ -17,10 +17,10 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.wang.dribbble.R;
 import com.wang.dribbble.data.model.User;
-import com.wang.dribbble.module.base.BaseActivity;
 import com.wang.dribbble.module.base.FragmentManagerActivity;
 import com.wang.dribbble.module.setting.SettingActivity;
-import com.wang.dribbble.module.shots.ListShotsFragment;
+import com.wang.dribbble.module.shots.ShotsPagesFragment;
+import com.wang.dribbble.module.shots.list.ListShotsFragment;
 
 public class MainActivity extends FragmentManagerActivity implements MainContract.View{
 
@@ -97,7 +97,7 @@ public class MainActivity extends FragmentManagerActivity implements MainContrac
     public Fragment createFragment(int index) {
         switch (index){
             case LIST_SHOTS:
-                return ListShotsFragment.newInstance();
+                return ShotsPagesFragment.newInstance();
         }
         return null;
     }

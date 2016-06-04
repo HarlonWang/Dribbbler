@@ -1,4 +1,4 @@
-package com.wang.dribbble.module.shotsdetail;
+package com.wang.dribbble.module.shots.detail;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

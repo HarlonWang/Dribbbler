@@ -8,4 +8,7 @@
     <color name="gmdIconColor">#b4b4b4</color>
     <color name="author_background">#66000000</color>
     <color name="grey_ripple">#8ddd</color>
+    <color name="color_DDDDDD">#dddddd</color>
+    <color name="color_99999">#999999</color>
+    <color name="color_F6F6F6">#f6f6f6</color>
 </resources>

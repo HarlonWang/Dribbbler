@@ -1,4 +1,4 @@
-package com.wang.dribbble.module.shots;
+package com.wang.dribbble.module.shots.list;
 
 import com.wang.dribbble.data.model.Shots;
 

@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".module.login.LoginActivity" android:label="SIGN IN"/>
         <activity android:name=".module.setting.SettingActivity" android:label="Setting"/>
-        <activity android:name=".module.shotsdetail.ShotsDetailActivity" android:label="Detail"/>
+        <activity android:name=".module.shots.detail.ShotsDetailActivity" android:label="Detail"/>
         <activity android:name=".module.main.MainActivity" android:label="Shots" android:theme="@style/CustomTheme"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
