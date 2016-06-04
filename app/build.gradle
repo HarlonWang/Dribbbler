@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.wang.dribbble"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "0.8.8"
+        archivesBaseName = "DR_v"+versionName
+        buildConfigField "String", "CLIENT_ID", "\"${CLIENT_ID}\""
+        buildConfigField "String", "CLIENT_SECRET", "\"${CLIENT_SECRET}\""
+        buildConfigField "String", "REDIRECT_URI", "\"${REDIRECT_URI}\""
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // If you need to add more flavors, consider using flavor dimensions.
+    productFlavors {
+        mock {
+            applicationIdSuffix = ".mock"
+        }
+        prod {
+
+        }
+    }
+
+    // Remove mockRelease as it's not needed.
+    android.variantFilter { variant ->
+        if(variant.buildType.name.equals('release')
+                && variant.getFlavors().get(0).name.equals('mock')) {
+            variant.setIgnore(true);
+        }
+    }
+
+    // Always show the result of every unit test, even if it passes.
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile('com.mikepenz:materialdrawer:5.2.9@aar') {
+        transitive = true
+    }
+    compile 'com.jakewharton:butterknife:8.0.1'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'com.squareup.retrofit2:retrofit:2.0.2'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    compile (group: 'com.tumblr', name: 'remember', version: '1.0.0', ext: 'aar')
+    compile "com.mikepenz:iconics-core:2.6.0@aar"
+    compile 'com.mikepenz:google-material-typeface:2.2.0.1.original@aar'
+    compile 'com.wang.avi:library:1.0.5'
+    compile 'com.yalantis:pulltomakesoup:1.0.1'
+}

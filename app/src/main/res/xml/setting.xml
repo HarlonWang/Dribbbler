@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen android:layout="@layout/preference_item" android:title="Setting"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:layout="@layout/preference_category_widget" android:title="Setting">
+        <Preference android:layout="@layout/preference_item" android:title="About" android:key="about">
+        </Preference>
+        <Preference android:layout="@layout/preference_item" android:title="Version" android:key="version">
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>
