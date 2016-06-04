@@ -6,7 +6,7 @@
 
 A tiny client for Dribbble . 
 
-*I'll add more features and functionality to the best of my ability, so stay tuned !*
+*I'll add more features and functionality to the best of my ability, so stay tuned ! :smile:*
 
 ### Screenshots
 
