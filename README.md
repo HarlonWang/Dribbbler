@@ -1,8 +1,12 @@
-<img src="screenshots/ic_launcher.png" width="192" height="192" />
-
 # Dribbbler
 
-**(Under development)** A tiny client for Dribbble . 
+<img src="screenshots/ic_launcher.png" width="128" height="128" />
+
+**(Under development)** 
+
+A tiny client for Dribbble . 
+
+*I'll add more features and functionality to the best of my ability, so stay tuned !*
 
 ### Screenshots
 
