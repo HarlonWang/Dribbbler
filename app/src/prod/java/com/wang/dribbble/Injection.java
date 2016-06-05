@@ -3,6 +3,7 @@ package com.wang.dribbble;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.tumblr.remember.Remember;
 import com.wang.dribbble.data.source.ShotsRepository;
 import com.wang.dribbble.data.source.local.ShotsLocalDataSource;
 import com.wang.dribbble.data.source.remote.ShotsRemoteDataSource;
@@ -17,4 +18,9 @@ public class Injection {
         checkNotNull(context);
         return ShotsRepository.getInstance(ShotsLocalDataSource.getInstance(context), ShotsRemoteDataSource.getInstance());
     }
+
+    public static String provideTokenValue(){
+        return Remember.getString("access_token","");
+    }
+
 }

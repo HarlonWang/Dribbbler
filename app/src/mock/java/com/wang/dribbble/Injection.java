@@ -13,8 +13,14 @@ import static com.wang.dribbble.utils.Utils.checkNotNull;
  * Created by Jack Wang on 2016/6/3.
  */
 public class Injection {
+
     public static ShotsRepository provideTasksRepository(@NonNull Context context) {
         checkNotNull(context);
         return ShotsRepository.getInstance(ShotsLocalDataSource.getInstance(context), ShotsRemoteDataSource.getInstance());
     }
+
+    public static String provideTokenValue(){
+        return "your access_token for test .";
+    }
+
 }
