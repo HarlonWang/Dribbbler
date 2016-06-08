@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -96,9 +97,8 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
     }
 
     private void setupRecyclerView() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),2);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        gridLayoutManager.setSpanSizeLookup(mAdapter.obtainGridSpanSizeLookUp(2));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new GridMarginDecoration(
                 getResources().getDimensionPixelSize(R.dimen.grid_item_spacing)));
         recyclerView.getRecyclerView().setHasFixedSize(true);
