@@ -25,7 +25,7 @@ public interface ShotsDataSource {
         void onDataNotAvailable();
     }
 
-    void getListShots(@NonNull LoadListShotsCallback callback);
+    void getListShots(int filterId,@NonNull LoadListShotsCallback callback);
 
     void deleteAllShots();
 

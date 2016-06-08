@@ -22,7 +22,14 @@ public class DRApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //SharedPreferences Storage
         Remember.init(this,"com.wang.dribbble");
+
+        drawerImageLoaderInit();
+    }
+
+    private void drawerImageLoaderInit() {
         DrawerImageLoader.init(new AbstractDrawerImageLoader() {
             @Override
             public void set(ImageView imageView, Uri uri, Drawable placeholder) {

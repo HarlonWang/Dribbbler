@@ -4,7 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.wang.dribbble.data.model.Shots;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import static com.wang.dribbble.utils.Utils.checkNotNull;
 
 /**
@@ -18,7 +21,7 @@ public class ShotsRepository implements ShotsDataSource{
 
     private final ShotsDataSource mShotsRemoteDataSource;
 
-    List<Shots> mCachedShots;
+    Map<Integer,List<Shots>> mCachedShots=new HashMap<>();
 
     boolean mCacheIsDirty = false;
 
@@ -42,39 +45,39 @@ public class ShotsRepository implements ShotsDataSource{
 
 
     @Override
-    public void getListShots(@NonNull final LoadListShotsCallback callback) {
+    public void getListShots(final int filterId, @NonNull final LoadListShotsCallback callback) {
         checkNotNull(callback);
-        if (mCachedShots!=null&&!mCacheIsDirty){
-            callback.onListShotsLoaded(mCachedShots);
+        if (mCachedShots.get(filterId)!=null&&!mCacheIsDirty){
+            callback.onListShotsLoaded(mCachedShots.get(filterId));
             return;
         }
         if (mCacheIsDirty){
-            getListShotsFromRemote(callback);
+            getListShotsFromRemote(filterId,callback);
         }else {
-            mShotsLocalDataSource.getListShots(new LoadListShotsCallback() {
+            mShotsLocalDataSource.getListShots(filterId,new LoadListShotsCallback() {
                 @Override
                 public void onListShotsLoaded(List<Shots> shotsList) {
-                    mCachedShots=shotsList;
-                    callback.onListShotsLoaded(mCachedShots);
+                    mCachedShots.put(filterId,shotsList);
+                    callback.onListShotsLoaded(shotsList);
                 }
 
                 @Override
                 public void onDataNotAvailable() {
-                    getListShotsFromRemote(callback);
+                    getListShotsFromRemote(filterId,callback);
                 }
             });
         }
     }
 
-    private void getListShotsFromRemote(final LoadListShotsCallback callback){
-        mShotsRemoteDataSource.getListShots(new LoadListShotsCallback() {
+    private void getListShotsFromRemote(final int filterId, final LoadListShotsCallback callback){
+        mShotsRemoteDataSource.getListShots(filterId,new LoadListShotsCallback() {
             @Override
             public void onListShotsLoaded(List<Shots> shotsList) {
-                mCachedShots=shotsList;
+                mCachedShots.put(filterId,shotsList);
                 mCacheIsDirty=false;
                 mShotsLocalDataSource.deleteAllShots();
-                mShotsLocalDataSource.saveListShots(mCachedShots);
-                callback.onListShotsLoaded(mCachedShots);
+                mShotsLocalDataSource.saveListShots(shotsList);
+                callback.onListShotsLoaded(shotsList);
             }
 
             @Override
@@ -99,10 +102,12 @@ public class ShotsRepository implements ShotsDataSource{
         if (mCachedShots==null){
             mShotsRemoteDataSource.getShots(shotsId, callback);
         }
-        for(Shots shots:mCachedShots){
-            if (shots.id==shotsId){
-                callback.onShotsLoaded(shots);
-                break;
+        for (int i = 0; i < mCachedShots.size(); i++) {
+            for(Shots shots:mCachedShots.get(i)){
+                if (shots.id==shotsId){
+                    callback.onShotsLoaded(shots);
+                    break;
+                }
             }
         }
     }
@@ -111,4 +116,6 @@ public class ShotsRepository implements ShotsDataSource{
     public void saveListShots(List<Shots> shotsList) {
 
     }
+
+
 }

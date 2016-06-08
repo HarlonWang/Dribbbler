@@ -5,6 +5,7 @@ import com.wang.dribbble.data.model.Shots;
 import com.wang.dribbble.data.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -13,6 +14,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 /**
  * Created by Jack Wang on 2016/6/2.
@@ -30,10 +32,10 @@ public interface DribbbleService {
 
 
     @GET("shots")
-    Call<List<Shots>> getShotsList(@Query("page")String page,@Query("per_page")String per_page);
+    Call<List<Shots>> getShotsList();
 
     @GET("shots")
-    Call<List<Shots>> getShotsList();
+    Call<List<Shots>> getShotsList(@QueryMap Map<String,String> map);
 
     @GET("shots/{id}")
     Call<Shots> getShots(@Path("id")int shotsId);

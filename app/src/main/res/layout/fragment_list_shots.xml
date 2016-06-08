@@ -5,15 +5,12 @@
     android:id="@+id/pull_to_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView
+
+    <com.jude.easyrecyclerview.EasyRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="2dp"
-        android:clipToPadding="false"
-        android:scrollbars="vertical"
-        android:scrollbarStyle="insideOverlay"
-        android:orientation="vertical"
-        app:layoutManager="android.support.v7.widget.GridLayoutManager"
-        app:spanCount="3" />
+        app:scrollbarStyle="insideOverlay"
+        />
+
 </android.support.v4.widget.SwipeRefreshLayout>

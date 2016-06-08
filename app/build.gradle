@@ -69,4 +69,5 @@ dependencies {
     compile 'com.mikepenz:google-material-typeface:2.2.0.1.original@aar'
     compile 'com.wang.avi:library:1.0.5'
     compile 'com.yalantis:pulltomakesoup:1.0.1'
+    compile 'com.jude:easyrecyclerview:3.5.8'
 }

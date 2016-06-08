@@ -16,7 +16,9 @@ public interface ListShotsContract {
     }
 
     interface Presenter{
-        void loadListShots(boolean forceUpdate);
+        void loadListShots(boolean forceUpdate,int filterId);
+
+        void loadMoreShots(int filterId,int page);
     }
 
 }

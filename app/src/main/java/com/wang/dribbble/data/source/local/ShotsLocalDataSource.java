@@ -22,7 +22,7 @@ public class ShotsLocalDataSource implements ShotsDataSource{
     }
 
     @Override
-    public void getListShots(@NonNull LoadListShotsCallback callback) {
+    public void getListShots(int filterId,@NonNull LoadListShotsCallback callback) {
         callback.onDataNotAvailable();
     }
 

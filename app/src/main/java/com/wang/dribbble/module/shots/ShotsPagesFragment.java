@@ -43,11 +43,11 @@ public class ShotsPagesFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         viewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
 
-            private final String[] CATEGORIES={"Popular","Recent","Debuts"};
+            private final String[] CATEGORIES={"Popular","Recent","Teams"};
 
             @Override
             public Fragment getItem(int position) {
-                return ListShotsFragment.newInstance();
+                return ListShotsFragment.newInstance(position);
             }
 
             @Override

@@ -7,7 +7,9 @@ import com.wang.dribbble.api.RetrofitClient;
 import com.wang.dribbble.data.model.Shots;
 import com.wang.dribbble.data.source.ShotsDataSource;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,6 +19,12 @@ import retrofit2.Response;
  * Created by Jack Wang on 2016/6/3.
  */
 public class ShotsRemoteDataSource implements ShotsDataSource{
+
+    public static final int FILTER_POPULAR=0;
+
+    public static final int FILTER_RECENT=1;
+
+    public static final int FILTER_DEBUTS=2;
 
     DribbbleService mService;
 
@@ -35,8 +43,20 @@ public class ShotsRemoteDataSource implements ShotsDataSource{
 
 
     @Override
-    public void getListShots(@NonNull final LoadListShotsCallback callback) {
-        Call<List<Shots>> shotsList = mService.getShotsList();
+    public void getListShots(int filterId,@NonNull final LoadListShotsCallback callback) {
+        Map<String,String> map=new HashMap<>();
+        switch (filterId){
+            case FILTER_POPULAR:
+                map.put("sort","popular");
+                break;
+            case FILTER_RECENT:
+                map.put("sort","recent");
+                break;
+            case FILTER_DEBUTS:
+                map.put("list","debuts");
+                break;
+        }
+        Call<List<Shots>> shotsList = mService.getShotsList(map);
         shotsList.enqueue(new Callback<List<Shots>>() {
             @Override
             public void onResponse(Call<List<Shots>> call, Response<List<Shots>> response) {
