@@ -1,17 +1,10 @@
 package com.wang.dribbble.module.shots.list;
 
-import com.wang.dribbble.api.RetrofitClient;
 import com.wang.dribbble.data.model.Shots;
 import com.wang.dribbble.data.source.ShotsDataSource;
 import com.wang.dribbble.data.source.ShotsRepository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Created by Jack Wang on 2016/6/3.

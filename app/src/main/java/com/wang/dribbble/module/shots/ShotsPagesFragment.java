@@ -41,6 +41,7 @@ public class ShotsPagesFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        viewPager.setOffscreenPageLimit(3);
         viewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
 
             private final String[] CATEGORIES={"Popular","Recent","Debuts"};
