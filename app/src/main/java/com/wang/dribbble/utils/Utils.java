@@ -33,4 +33,8 @@ public class Utils {
         return version;
     }
 
+    public static int dp2px(Context context,int dpValue) {
+        return (int) context.getResources().getDisplayMetrics().density * dpValue;
+    }
+
 }

@@ -27,6 +27,11 @@ public class ShotsLocalDataSource implements ShotsDataSource{
     }
 
     @Override
+    public void getListShotsByPage(int page, int filterId, @NonNull LoadListShotsCallback callback) {
+
+    }
+
+    @Override
     public void deleteAllShots() {
 
     }

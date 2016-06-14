@@ -49,29 +49,14 @@ public class ListShotsPresenter implements ListShotsContract.Presenter{
 
     @Override
     public void loadMoreShots(int page,int filterId) {
-        Map<String,String> map=new HashMap<>();
-        switch (filterId){
-            case 0:
-                map.put("sort","popular");
-                break;
-            case 1:
-                map.put("sort","recent");
-                break;
-            case 2:
-                map.put("list","debuts");
-                break;
-        }
-        map.put("page",String.valueOf(page));
-        map.put("per_page","12");
-        Call<List<Shots>> shotsList = RetrofitClient.getInstance().getDRService().getShotsList(map);
-        shotsList.enqueue(new Callback<List<Shots>>() {
+        mShotsRepository.getListShotsByPage(page, filterId, new ShotsDataSource.LoadListShotsCallback() {
             @Override
-            public void onResponse(Call<List<Shots>> call, Response<List<Shots>> response) {
-                mView.showListShots(response.body());
+            public void onListShotsLoaded(List<Shots> shotsList) {
+                mView.showListShots(shotsList);
             }
 
             @Override
-            public void onFailure(Call<List<Shots>> call, Throwable t) {
+            public void onDataNotAvailable() {
                 mView.showLoadFailed("Load failed ...");
             }
         });

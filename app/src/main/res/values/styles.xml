@@ -27,4 +27,8 @@
         <item name="android:windowBackground">@color/windowBackground</item>
     </style>
 
+    <style name="TabTextStyle" parent="android:TextAppearance.Widget.TabWidget">
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

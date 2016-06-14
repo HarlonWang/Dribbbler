@@ -69,6 +69,11 @@ public class ShotsRepository implements ShotsDataSource{
         }
     }
 
+    @Override
+    public void getListShotsByPage(int page, int filterId, @NonNull LoadListShotsCallback callback) {
+        mShotsRemoteDataSource.getListShotsByPage(page,filterId,callback);
+    }
+
     private void getListShotsFromRemote(final int filterId, final LoadListShotsCallback callback){
         mShotsRemoteDataSource.getListShots(filterId,new LoadListShotsCallback() {
             @Override

@@ -71,6 +71,36 @@ public class ShotsRemoteDataSource implements ShotsDataSource{
     }
 
     @Override
+    public void getListShotsByPage(int page, int filterId, @NonNull final LoadListShotsCallback callback) {
+        Map<String,String> map=new HashMap<>();
+        switch (filterId){
+            case 0:
+                map.put("sort","popular");
+                break;
+            case 1:
+                map.put("sort","recent");
+                break;
+            case 2:
+                map.put("list","debuts");
+                break;
+        }
+        map.put("page",String.valueOf(page));
+        map.put("per_page","12");
+        Call<List<Shots>> shotsList = RetrofitClient.getInstance().getDRService().getShotsList(map);
+        shotsList.enqueue(new Callback<List<Shots>>() {
+            @Override
+            public void onResponse(Call<List<Shots>> call, Response<List<Shots>> response) {
+                callback.onListShotsLoaded(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Shots>> call, Throwable t) {
+                callback.onDataNotAvailable();
+            }
+        });
+    }
+
+    @Override
     public void deleteAllShots() {
 
     }

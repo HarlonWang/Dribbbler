@@ -10,6 +10,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ import com.wang.dribbble.module.base.BaseFragment;
 import com.wang.dribbble.module.shots.detail.ShotsDetailActivity;
 import com.wang.dribbble.utils.GridMarginDecoration;
 import com.wang.dribbble.utils.ImageSize;
+import com.wang.dribbble.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +104,8 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
         recyclerView.addItemDecoration(new GridMarginDecoration(
                 getResources().getDimensionPixelSize(R.dimen.grid_item_spacing)));
         recyclerView.getRecyclerView().setHasFixedSize(true);
+        recyclerView.getRecyclerView().setClipToPadding(false);
+        recyclerView.getRecyclerView().setPadding(0, Utils.dp2px(getActivity(),16),0,Utils.dp2px(getActivity(),16));
         mAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -175,12 +179,12 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
 
         public class ListShotsViewHolder extends BaseViewHolder<Shots>{
 
-            @BindView(R.id.photo)
+            @BindView(R.id.image)
             public ImageView photo;
-            @BindView(R.id.gifFlag)
-            public ImageView gifFlag;
             @BindView(R.id.title)
             public TextView title;
+            @BindView(R.id.description)
+            public TextView description;
 
             public ListShotsViewHolder(View itemView) {
                 super(itemView);
@@ -191,7 +195,7 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
             public void setData(Shots item) {
                 Context context=photo.getContext();
                 title.setText(item.title);
-                gifFlag.setVisibility(item.animated?View.VISIBLE:View.GONE);
+                description.setText(Html.fromHtml(item.description==null?"":item.description));
                 Glide.with(context)
                         .load(item.images.normal)
                         .placeholder(R.color.placeholder)

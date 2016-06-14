@@ -6,13 +6,11 @@
 
 A tiny client for Dribbble . 
 
-*I'll add more features and functionality to the best of my ability, so stay tuned ! :heart:*
-
 ### Screenshots
 
-<img src="screenshots/Screenshot_2016-06-05-00-44-47_com.wang.dribbble.png" width="270" height="486" />   <img src="screenshots/Screenshot_2016-06-05-00-47-33_com.wang.dribbble.png"  width="270" height="486"/>
+<img src="screenshots/device-2016-06-14-103907.png" width="480" height="800" />   
 
-<img src="screenshots/Screenshot_2016-06-05-00-50-08_com.wang.dribbble.png" width="270" height="486"/>   <img src="screenshots/s1.png"  width="270" height="486"/>
+<img src="screenshots/device-2016-06-14-104656.png"  width="480" height="800"/>
 
 ### License
 ```

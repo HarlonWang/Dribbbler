@@ -27,6 +27,8 @@ public interface ShotsDataSource {
 
     void getListShots(int filterId,@NonNull LoadListShotsCallback callback);
 
+    void getListShotsByPage(int page,int filterId,@NonNull LoadListShotsCallback callback);
+
     void deleteAllShots();
 
     void refreshShots();
