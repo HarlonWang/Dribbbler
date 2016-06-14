@@ -8,7 +8,7 @@ A tiny client for Dribbble .
 
 ### Screenshots
 
-<img src="screenshots/device-2016-06-14-103907.png" width="480" height="800" />   
+<img src="screenshots/device-2016-06-14-110556.png" width="480" height="800" />   
 
 <img src="screenshots/device-2016-06-14-104656.png"  width="480" height="800"/>
 
