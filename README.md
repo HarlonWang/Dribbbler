@@ -2,7 +2,7 @@
 
 <img src="screenshots/ic_launcher.png" width="128" height="128" />
 
-A tiny client for Dribbble . 
+A  Dribbble client with  MVP + Repository pattern . 
 
 ### Screenshots
 
