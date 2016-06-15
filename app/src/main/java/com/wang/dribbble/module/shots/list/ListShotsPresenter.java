@@ -41,11 +41,11 @@ public class ListShotsPresenter implements ListShotsContract.Presenter{
     }
 
     @Override
-    public void loadMoreShots(int page,int filterId) {
+    public void loadListShotsByPage(int filterId, int page) {
         mShotsRepository.getListShotsByPage(page, filterId, new ShotsDataSource.LoadListShotsCallback() {
             @Override
             public void onListShotsLoaded(List<Shots> shotsList) {
-                mView.showListShots(shotsList);
+                mView.showListShotsFromPage(shotsList);
             }
 
             @Override
@@ -54,4 +54,5 @@ public class ListShotsPresenter implements ListShotsContract.Presenter{
             }
         });
     }
+
 }

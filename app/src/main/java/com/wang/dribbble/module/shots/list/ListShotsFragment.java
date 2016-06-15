@@ -121,7 +121,7 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
             @Override
             public void onLoadMore() {
                 pages++;
-                mPresenter.loadMoreShots(pages,filterId);
+                mPresenter.loadListShotsByPage(pages,filterId);
             }
         });
     }
@@ -147,6 +147,12 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
 
     @Override
     public void showListShots(List<Shots> shotsList) {
+        mAdapter.clear();
+        mAdapter.addAll(shotsList);
+    }
+
+    @Override
+    public void showListShotsFromPage(List<Shots> shotsList) {
         mAdapter.addAll(shotsList);
     }
 

@@ -10,15 +10,23 @@ import java.util.List;
 public interface ListShotsContract {
 
     interface View{
+
         void setLoadingIndicator(boolean active);
+
         void showListShots(List<Shots> shotsList);
+
+        void showListShotsFromPage(List<Shots> shotsList);
+
         void showLoadFailed(String message);
+
     }
 
     interface Presenter{
+
         void loadListShots(boolean forceUpdate,int filterId);
 
-        void loadMoreShots(int filterId,int page);
+        void loadListShotsByPage(int filterId,int page);
+
     }
 
 }
