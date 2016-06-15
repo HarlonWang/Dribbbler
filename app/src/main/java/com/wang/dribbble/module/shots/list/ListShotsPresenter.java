@@ -14,6 +14,8 @@ public class ListShotsPresenter implements ListShotsContract.Presenter{
     private ShotsRepository mShotsRepository;
     private ListShotsContract.View mView;
 
+    private int page=1;
+
     public ListShotsPresenter(ShotsRepository shotsRepository,ListShotsContract.View view){
         this.mShotsRepository=shotsRepository;
         this.mView=view;
@@ -21,6 +23,7 @@ public class ListShotsPresenter implements ListShotsContract.Presenter{
 
     @Override
     public void loadListShots(boolean forceUpdate, int filterId) {
+        page=1;
         mView.setLoadingIndicator(true);
         if (forceUpdate){
             mShotsRepository.refreshShots();
@@ -41,7 +44,8 @@ public class ListShotsPresenter implements ListShotsContract.Presenter{
     }
 
     @Override
-    public void loadListShotsByPage(int filterId, int page) {
+    public void loadListShotsByPage(int filterId) {
+        page++;
         mShotsRepository.getListShotsByPage(page, filterId, new ShotsDataSource.LoadListShotsCallback() {
             @Override
             public void onListShotsLoaded(List<Shots> shotsList) {

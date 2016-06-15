@@ -54,8 +54,6 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
 
     private int filterId;
 
-    private int pages=1;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,9 +90,6 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
         if (getArguments()!=null){
             filterId=getArguments().getInt("filterId",0);
         }
-        if (savedInstanceState!=null){
-            pages=savedInstanceState.getInt("pages");
-        }
         mPresenter.loadListShots(false,filterId);
     }
 
@@ -120,16 +115,9 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
 
             @Override
             public void onLoadMore() {
-                pages++;
-                mPresenter.loadListShotsByPage(pages,filterId);
+                mPresenter.loadListShotsByPage(filterId);
             }
         });
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("pages",pages);
     }
 
     @Override

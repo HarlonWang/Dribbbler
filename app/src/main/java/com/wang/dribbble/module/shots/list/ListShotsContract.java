@@ -25,7 +25,7 @@ public interface ListShotsContract {
 
         void loadListShots(boolean forceUpdate,int filterId);
 
-        void loadListShotsByPage(int filterId,int page);
+        void loadListShotsByPage(int filterId);
 
     }
 
