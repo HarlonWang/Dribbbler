@@ -7,11 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +25,6 @@ import com.wang.dribbble.R;
 import com.wang.dribbble.data.model.Shots;
 import com.wang.dribbble.module.base.BaseFragment;
 import com.wang.dribbble.module.shots.detail.ShotsDetailActivity;
-import com.wang.dribbble.utils.GridMarginDecoration;
 import com.wang.dribbble.utils.ImageSize;
 import com.wang.dribbble.utils.Utils;
 
@@ -96,8 +92,6 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
     private void setupRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(new GridMarginDecoration(
-                getResources().getDimensionPixelSize(R.dimen.grid_item_spacing)));
         recyclerView.getRecyclerView().setHasFixedSize(true);
         recyclerView.getRecyclerView().setClipToPadding(false);
         recyclerView.getRecyclerView().setPadding(0, Utils.dp2px(getActivity(),16),0,Utils.dp2px(getActivity(),16));
