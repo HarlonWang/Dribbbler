@@ -71,4 +71,5 @@ dependencies {
     compile 'com.wang.avi:library:1.0.5'
     compile 'com.yalantis:pulltomakesoup:1.0.1'
     compile 'com.jude:easyrecyclerview:3.5.8'
+    testCompile "org.mockito:mockito-core:2.0.57-beta"
 }
