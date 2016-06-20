@@ -37,7 +37,9 @@ public class MainActivity extends FragmentManagerActivity implements MainContrac
         setContentView(R.layout.activity_main);
         mPresenter=new MainPresenter(this);
         setupDrawer(savedInstanceState);
-        addFragment(LIST_SHOTS);
+        if (savedInstanceState==null){
+            addFragment(LIST_SHOTS);
+        }
         mPresenter.loadAccountUser();
     }
 
