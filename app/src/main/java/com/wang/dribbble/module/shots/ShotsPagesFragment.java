@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +47,13 @@ public class ShotsPagesFragment extends BaseFragment {
 
             private final String[] CATEGORIES={"Popular","Recent","Debuts"};
 
+            RecyclerView.RecycledViewPool mPool = new RecyclerView.RecycledViewPool();
+
             @Override
             public Fragment getItem(int position) {
-                return ListShotsFragment.newInstance(position);
+                ListShotsFragment fragment=ListShotsFragment.newInstance(position);
+                fragment.mPool=mPool;
+                return fragment;
             }
 
             @Override

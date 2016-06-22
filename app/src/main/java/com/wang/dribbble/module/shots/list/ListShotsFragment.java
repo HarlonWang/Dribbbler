@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +49,8 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
     ListShotsPresenter mPresenter;
     @BindView(R.id.pull_to_refresh)
     SwipeRefreshLayout pullToRefresh;
+
+    public RecyclerView.RecycledViewPool mPool;
 
     private int filterId;
 
@@ -91,7 +95,11 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
 
     private void setupRecyclerView() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setRecycleChildrenOnDetach(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+        if (mPool!=null){
+            recyclerView.getRecyclerView().setRecycledViewPool(mPool);
+        }
         recyclerView.getRecyclerView().setHasFixedSize(true);
         recyclerView.getRecyclerView().setClipToPadding(false);
         recyclerView.getRecyclerView().setPadding(0, Utils.dp2px(getActivity(),16),0,Utils.dp2px(getActivity(),16));
@@ -143,7 +151,7 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
-    public static Fragment newInstance(int filterId) {
+    public static ListShotsFragment newInstance(int filterId) {
         ListShotsFragment fragment=new ListShotsFragment();
         Bundle bundle=new Bundle();
         bundle.putInt("filterId",filterId);
