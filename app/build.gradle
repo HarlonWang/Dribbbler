@@ -10,7 +10,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 3
-        versionName "0.9.0"
+        versionName "1.0.0"
         archivesBaseName = "DR_v"+versionName
         buildConfigField "String", "CLIENT_ID", "\"${CLIENT_ID}\""
         buildConfigField "String", "CLIENT_SECRET", "\"${CLIENT_SECRET}\""
