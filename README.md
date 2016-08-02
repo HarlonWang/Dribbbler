@@ -2,7 +2,7 @@
 
 <img src="screenshots/ic_launcher.png" width="128" height="128" />
 
-A  Dribbble client with  MVP + Repository pattern , RxJava ,Retrofit . 
+A  Dribbble client with  MVP+Repository pattern , RxJava ,Retrofit . 
 
 ## Architecture
 
