@@ -2,15 +2,22 @@
 
 <img src="screenshots/ic_launcher.png" width="128" height="128" />
 
-A  Dribbble client with  MVP + Repository pattern . 
+A  Dribbble client with  MVP + Repository pattern , RxJava ,Retrofit . 
 
-### Screenshots
+## Architecture
+
+You can check out the different branches for more information .
+
+- [basic/](https://github.com/81813780/Dribbbler/tree/basic) - Basic Model-View-Presenter architecture with Retrofit .
+- [rxjava/](https://github.com/81813780/Dribbbler/tree/basic) - Basic Model-View-Presenter architecture with Retrofit , RxJava .
+
+## Screenshots
 
 <img src="screenshots/device-2016-06-14-110556.png" width="320" height="640" />   
 
 <img src="screenshots/device-2016-06-14-104656.png"  width="320" height="640"/>
 
-### License
+## License
 ```
 Copyright 2015 jack wang
 
