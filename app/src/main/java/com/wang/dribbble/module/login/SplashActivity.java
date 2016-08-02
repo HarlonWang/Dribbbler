@@ -17,7 +17,11 @@ import com.wang.dribbble.module.base.BaseActivity;
 import com.wang.dribbble.module.main.MainActivity;
 import com.wang.dribbble.utils.ImageSize;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
+import rx.Observable;
+import rx.Observer;
 
 /**
  * Created by Jack Wang on 2016/6/2.
@@ -46,14 +50,24 @@ public class SplashActivity extends BaseActivity {
             mLoginBut.setVisibility(View.VISIBLE);
             return;
         }
-        new Handler().postDelayed(new Runnable(){
+        Observable.timer(3, TimeUnit.SECONDS)
+                .subscribe(new Observer<Long>() {
+                    @Override
+                    public void onCompleted() {
+                        startActivity(new Intent(getActivity(),MainActivity.class));
+                        finish();
+                    }
 
-            public void run() {
-                startActivity(new Intent(getActivity(),MainActivity.class));
-                finish();
-            }
+                    @Override
+                    public void onError(Throwable e) {
 
-        }, 3500);
+                    }
+
+                    @Override
+                    public void onNext(Long aLong) {
+
+                    }
+                });
     }
 
     private void showSplashPhoto() {

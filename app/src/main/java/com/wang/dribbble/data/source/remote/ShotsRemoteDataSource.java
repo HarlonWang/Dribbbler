@@ -14,6 +14,10 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Jack Wang on 2016/6/3.
@@ -56,16 +60,24 @@ public class ShotsRemoteDataSource implements ShotsDataSource{
                 map.put("list","debuts");
                 break;
         }
-        Call<List<Shots>> shotsList = mService.getShotsList(map);
-        shotsList.enqueue(new Callback<List<Shots>>() {
+        Observable<List<Shots>> shotsList = mService.getShotsList(map);
+        shotsList
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<List<Shots>>() {
             @Override
-            public void onResponse(Call<List<Shots>> call, Response<List<Shots>> response) {
-                callback.onListShotsLoaded(response.body());
+            public void onCompleted() {
+
             }
 
             @Override
-            public void onFailure(Call<List<Shots>> call, Throwable t) {
+            public void onError(Throwable e) {
                 callback.onDataNotAvailable();
+            }
+
+            @Override
+            public void onNext(List<Shots> shotsList) {
+                callback.onListShotsLoaded(shotsList);
             }
         });
     }
@@ -86,16 +98,24 @@ public class ShotsRemoteDataSource implements ShotsDataSource{
         }
         map.put("page",String.valueOf(page));
         map.put("per_page","12");
-        Call<List<Shots>> shotsList = RetrofitClient.getInstance().getDRService().getShotsList(map);
-        shotsList.enqueue(new Callback<List<Shots>>() {
+        Observable<List<Shots>> shotsList = mService.getShotsList(map);
+        shotsList
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<List<Shots>>() {
             @Override
-            public void onResponse(Call<List<Shots>> call, Response<List<Shots>> response) {
-                callback.onListShotsLoaded(response.body());
+            public void onCompleted() {
+
             }
 
             @Override
-            public void onFailure(Call<List<Shots>> call, Throwable t) {
+            public void onError(Throwable e) {
                 callback.onDataNotAvailable();
+            }
+
+            @Override
+            public void onNext(List<Shots> shotsList) {
+                callback.onListShotsLoaded(shotsList);
             }
         });
     }
@@ -112,16 +132,24 @@ public class ShotsRemoteDataSource implements ShotsDataSource{
 
     @Override
     public void getShots(@NonNull int shotsId, @NonNull final GetShotsCallback callback) {
-        Call<Shots> shots = mService.getShots(shotsId);
-        shots.enqueue(new Callback<Shots>() {
+        Observable<Shots> shots = mService.getShots(shotsId);
+        shots
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<Shots>() {
             @Override
-            public void onResponse(Call<Shots> call, Response<Shots> response) {
-                callback.onShotsLoaded(response.body());
+            public void onCompleted() {
+
             }
 
             @Override
-            public void onFailure(Call<Shots> call, Throwable t) {
+            public void onError(Throwable e) {
                 callback.onDataNotAvailable();
+            }
+
+            @Override
+            public void onNext(Shots shots) {
+                callback.onShotsLoaded(shots);
             }
         });
     }

@@ -15,6 +15,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import rx.Observable;
 
 /**
  * Created by Jack Wang on 2016/6/2.
@@ -25,21 +26,21 @@ public interface DribbbleService {
 
     @FormUrlEncoded
     @POST("https://dribbble.com/oauth/token")
-    Call<DribbbleToken> getDrToken(@Field("client_id")String client_id,
-                                   @Field("client_secret")String client_secret,
-                                   @Field("code")String code,
-                                   @Field("redirect_uri")String redirect_uri);
+    Observable<DribbbleToken> getDrToken(@Field("client_id")String client_id,
+                                         @Field("client_secret")String client_secret,
+                                         @Field("code")String code,
+                                         @Field("redirect_uri")String redirect_uri);
 
 
     @GET("shots")
-    Call<List<Shots>> getShotsList();
+    Observable<List<Shots>> getShotsList();
 
     @GET("shots")
-    Call<List<Shots>> getShotsList(@QueryMap Map<String,String> map);
+    Observable<List<Shots>> getShotsList(@QueryMap Map<String,String> map);
 
     @GET("shots/{id}")
-    Call<Shots> getShots(@Path("id")int shotsId);
+    Observable<Shots> getShots(@Path("id")int shotsId);
 
     @GET("user")
-    Call<User> getAuthenticatedUser();
+    Observable<User> getAuthenticatedUser();
 }
