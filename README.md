@@ -10,6 +10,7 @@ You can check out the different branches for more information .
 
 - [basic/](https://github.com/81813780/Dribbbler/tree/basic) - Basic Model-View-Presenter architecture with Retrofit .
 - [rxjava/](https://github.com/81813780/Dribbbler/tree/basic) - Basic Model-View-Presenter architecture with Retrofit , RxJava .
+- rxjava-dagger/ - under development .
 
 ## Screenshots
 
