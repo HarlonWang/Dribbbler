@@ -9,7 +9,7 @@ A  Dribbble client with  MVP+Repository pattern , RxJava ,Retrofit .
 You can check out the different branches for more information .
 
 - [basic/](https://github.com/81813780/Dribbbler/tree/basic) - Basic MVP architecture with Retrofit .
-- [rxjava/](https://github.com/81813780/Dribbbler/tree/basic) - Basic MVP architecture with Retrofit , RxJava .
+- [rxjava/](https://github.com/81813780/Dribbbler/tree/rxjava) - Basic MVP architecture with Retrofit , RxJava .
 - rxjava-dagger/ - under development .
 
 ## Screenshots
