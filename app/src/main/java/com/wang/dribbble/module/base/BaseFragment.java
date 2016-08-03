@@ -19,7 +19,7 @@ public abstract class BaseFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //防止Fragment重叠，思路来自http://www.jianshu.com/p/c12a98a36b2b
+        //防止Fragment重叠，参考http://www.jianshu.com/p/c12a98a36b2b
         if (savedInstanceState != null) {
             boolean isSupportHidden = savedInstanceState.getBoolean(STATE_SAVE_IS_HIDDEN);
 

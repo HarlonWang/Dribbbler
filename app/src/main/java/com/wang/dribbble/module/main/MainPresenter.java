@@ -6,6 +6,12 @@ import com.wang.dribbble.data.model.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import rx.Observable;
+import rx.Observer;
+import rx.Scheduler;
+import rx.SingleSubscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Jack Wang on 2016/6/2.
@@ -20,17 +26,22 @@ public class MainPresenter implements MainContract.Presenter{
 
     @Override
     public void loadAccountUser() {
-        Call<User> authenticatedUser = RetrofitClient.getInstance().getDRService().getAuthenticatedUser();
-        authenticatedUser.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                mView.updateUserProfile(response.body());
-            }
+        RetrofitClient
+                .getInstance()
+                .getDRService()
+                .getAuthenticatedUser()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new SingleSubscriber<User>() {
+                    @Override
+                    public void onSuccess(User user) {
+                        mView.updateUserProfile(user);
+                    }
 
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
+                    @Override
+                    public void onError(Throwable error) {
 
-            }
-        });
+                    }
+                });
     }
 }
