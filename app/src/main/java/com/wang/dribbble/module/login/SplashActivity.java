@@ -2,7 +2,6 @@ package com.wang.dribbble.module.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import rx.Observable;
-import rx.Observer;
+import rx.functions.Action1;
 
 /**
  * Created by Jack Wang on 2016/6/2.
@@ -51,21 +50,11 @@ public class SplashActivity extends BaseActivity {
             return;
         }
         Observable.timer(3, TimeUnit.SECONDS)
-                .subscribe(new Observer<Long>() {
+                .subscribe(new Action1<Long>() {
                     @Override
-                    public void onCompleted() {
+                    public void call(Long aLong) {
                         startActivity(new Intent(getActivity(),MainActivity.class));
                         finish();
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(Long aLong) {
-
                     }
                 });
     }

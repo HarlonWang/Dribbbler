@@ -9,6 +9,7 @@ import retrofit2.Response;
 import rx.Observable;
 import rx.Observer;
 import rx.Scheduler;
+import rx.SingleSubscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -25,25 +26,22 @@ public class MainPresenter implements MainContract.Presenter{
 
     @Override
     public void loadAccountUser() {
-        Observable<User> authenticatedUser = RetrofitClient.getInstance().getDRService().getAuthenticatedUser();
-        authenticatedUser
+        RetrofitClient
+                .getInstance()
+                .getDRService()
+                .getAuthenticatedUser()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<User>() {
-            @Override
-            public void onCompleted() {
+                .subscribe(new SingleSubscriber<User>() {
+                    @Override
+                    public void onSuccess(User user) {
+                        mView.updateUserProfile(user);
+                    }
 
-            }
+                    @Override
+                    public void onError(Throwable error) {
 
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(User user) {
-                mView.updateUserProfile(user);
-            }
-        });
+                    }
+                });
     }
 }

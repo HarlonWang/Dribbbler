@@ -16,6 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import rx.Observable;
 import rx.Observer;
+import rx.SingleSubscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -60,26 +61,20 @@ public class ShotsRemoteDataSource implements ShotsDataSource{
                 map.put("list","debuts");
                 break;
         }
-        Observable<List<Shots>> shotsList = mService.getShotsList(map);
-        shotsList
+        mService.getShotsList(map)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<List<Shots>>() {
-            @Override
-            public void onCompleted() {
+                .subscribe(new SingleSubscriber<List<Shots>>() {
+                    @Override
+                    public void onSuccess(List<Shots> value) {
+                        callback.onListShotsLoaded(value);
+                    }
 
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                callback.onDataNotAvailable();
-            }
-
-            @Override
-            public void onNext(List<Shots> shotsList) {
-                callback.onListShotsLoaded(shotsList);
-            }
-        });
+                    @Override
+                    public void onError(Throwable error) {
+                        callback.onDataNotAvailable();
+                    }
+                });
     }
 
     @Override
@@ -98,26 +93,20 @@ public class ShotsRemoteDataSource implements ShotsDataSource{
         }
         map.put("page",String.valueOf(page));
         map.put("per_page","12");
-        Observable<List<Shots>> shotsList = mService.getShotsList(map);
-        shotsList
+        mService.getShotsList(map)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<List<Shots>>() {
-            @Override
-            public void onCompleted() {
+                .subscribe(new SingleSubscriber<List<Shots>>() {
+                    @Override
+                    public void onSuccess(List<Shots> shotsList) {
+                        callback.onListShotsLoaded(shotsList);
+                    }
 
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                callback.onDataNotAvailable();
-            }
-
-            @Override
-            public void onNext(List<Shots> shotsList) {
-                callback.onListShotsLoaded(shotsList);
-            }
-        });
+                    @Override
+                    public void onError(Throwable error) {
+                        callback.onDataNotAvailable();
+                    }
+                });
     }
 
     @Override
@@ -132,26 +121,20 @@ public class ShotsRemoteDataSource implements ShotsDataSource{
 
     @Override
     public void getShots(@NonNull int shotsId, @NonNull final GetShotsCallback callback) {
-        Observable<Shots> shots = mService.getShots(shotsId);
-        shots
+        mService.getShots(shotsId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Shots>() {
-            @Override
-            public void onCompleted() {
+                .subscribe(new SingleSubscriber<Shots>() {
+                    @Override
+                    public void onSuccess(Shots shots) {
+                        callback.onShotsLoaded(shots);
+                    }
 
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                callback.onDataNotAvailable();
-            }
-
-            @Override
-            public void onNext(Shots shots) {
-                callback.onShotsLoaded(shots);
-            }
-        });
+                    @Override
+                    public void onError(Throwable error) {
+                        callback.onDataNotAvailable();
+                    }
+                });
     }
 
     @Override

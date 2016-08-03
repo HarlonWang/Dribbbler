@@ -12,6 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import rx.Observable;
 import rx.Observer;
+import rx.SingleSubscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -28,35 +29,33 @@ public class LoginPresenter implements LoginContract.Presenter{
 
     @Override
     public void loadToken(String code) {
-
-        Observable<DribbbleToken> drToken = RetrofitClient.getInstance().getDRService().getDrToken(BuildConfig.CLIENT_ID, BuildConfig.CLIENT_SECRET, code, BuildConfig.REDIRECT_URI);
-        drToken
+        RetrofitClient.getInstance()
+                .getDRService()
+                .getDrToken(BuildConfig.CLIENT_ID,
+                        BuildConfig.CLIENT_SECRET,
+                        code,
+                        BuildConfig.REDIRECT_URI)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<DribbbleToken>() {
-            @Override
-            public void onCompleted() {
+                .subscribe(new SingleSubscriber<DribbbleToken>() {
+                    @Override
+                    public void onSuccess(DribbbleToken dribbbleToken) {
+                        String access_token=dribbbleToken.access_token;
+                        if (TextUtils.isEmpty(access_token)){
+                            mView.loginFailure();
+                            return;
+                        }
+                        Remember.putString("access_token",access_token);
+                        Remember.putString("token_type",dribbbleToken.access_token);
+                        Remember.putString("scope",dribbbleToken.access_token);
+                        mView.loginSuccess();
+                    }
 
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                mView.loginFailure();
-            }
-
-            @Override
-            public void onNext(DribbbleToken dribbbleToken) {
-                String access_token=dribbbleToken.access_token;
-                if (TextUtils.isEmpty(access_token)){
-                    mView.loginFailure();
-                    return;
-                }
-                Remember.putString("access_token",access_token);
-                Remember.putString("token_type",dribbbleToken.access_token);
-                Remember.putString("scope",dribbbleToken.access_token);
-                mView.loginSuccess();
-            }
-        });
+                    @Override
+                    public void onError(Throwable error) {
+                        mView.loginFailure();
+                    }
+                });
     }
 
 
