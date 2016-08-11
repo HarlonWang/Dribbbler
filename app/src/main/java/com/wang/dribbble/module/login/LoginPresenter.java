@@ -7,6 +7,8 @@ import com.wang.dribbble.BuildConfig;
 import com.wang.dribbble.api.RetrofitClient;
 import com.wang.dribbble.data.model.DribbbleToken;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,6 +25,7 @@ public class LoginPresenter implements LoginContract.Presenter{
 
     private LoginContract.View mView;
 
+    @Inject
     public LoginPresenter(LoginContract.View view){
         this.mView=view;
     }

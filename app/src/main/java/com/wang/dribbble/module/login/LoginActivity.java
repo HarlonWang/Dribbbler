@@ -19,6 +19,8 @@ import com.wang.dribbble.R;
 import com.wang.dribbble.module.base.BaseActivity;
 import com.wang.dribbble.module.main.MainActivity;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 
 /**
@@ -35,13 +37,18 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
 
+    @Inject
     LoginPresenter mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_dribbble);
-        mPresenter=new LoginPresenter(this);
+        DaggerLoginComponent
+                .builder()
+                .loginModule(new LoginModule(this))
+                .build()
+                .inject(this);
         setupWebView();
     }
 

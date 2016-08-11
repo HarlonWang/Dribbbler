@@ -4,13 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +20,12 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.wang.dribbble.Injection;
+import com.wang.dribbble.ApplicationModule;
 import com.wang.dribbble.R;
+import com.wang.dribbble.ShotsRepositoryModule;
 import com.wang.dribbble.data.model.Shots;
+import com.wang.dribbble.data.source.DaggerShotsRepositoryComponent;
+import com.wang.dribbble.data.source.ShotsRepository;
 import com.wang.dribbble.module.base.BaseFragment;
 import com.wang.dribbble.module.shots.detail.ShotsDetailActivity;
 import com.wang.dribbble.utils.ImageSize;
@@ -32,6 +33,8 @@ import com.wang.dribbble.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +49,6 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
 
     ListShotsAdapter mAdapter;
 
-    ListShotsPresenter mPresenter;
     @BindView(R.id.pull_to_refresh)
     SwipeRefreshLayout pullToRefresh;
 
@@ -54,11 +56,29 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
 
     private int filterId;
 
+    @Inject
+    ListShotsPresenter mPresenter;
+
+    @Inject
+    ShotsRepository shotsRepository;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAdapter=new ListShotsAdapter(getActivity(),new ArrayList<Shots>(0));
-        mPresenter = new ListShotsPresenter(Injection.provideTasksRepository(getActivity().getApplicationContext()), this);
+
+        DaggerShotsRepositoryComponent
+                .builder()
+                .applicationModule(new ApplicationModule(getActivity().getApplicationContext()))
+                .shotsRepositoryModule(new ShotsRepositoryModule())
+                .build()
+                .inject(this);
+
+        /*DaggerListShotsComponent
+                .builder()
+                .listShotsModule(new ListShotsModule(shotsRepository,this))
+                .build()
+                .inject(this);*/
     }
 
     @Nullable

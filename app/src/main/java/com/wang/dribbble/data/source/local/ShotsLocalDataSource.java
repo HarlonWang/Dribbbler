@@ -8,16 +8,17 @@ import com.wang.dribbble.data.source.ShotsDataSource;
 
 import java.util.List;
 
+import javax.inject.Singleton;
+
 /**
  * Created by Jack Wang on 2016/6/3.
  */
+@Singleton
 public class ShotsLocalDataSource implements ShotsDataSource{
-
-    private static ShotsLocalDataSource INSTANCE;
 
     private Context mContext;
 
-    private ShotsLocalDataSource(Context context) {
+    public ShotsLocalDataSource(Context context) {
         this.mContext=context;
     }
 
@@ -51,10 +52,4 @@ public class ShotsLocalDataSource implements ShotsDataSource{
 
     }
 
-    public static ShotsDataSource getInstance(Context context) {
-        if (INSTANCE==null){
-            INSTANCE=new ShotsLocalDataSource(context);
-        }
-        return INSTANCE;
-    }
 }

@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import static com.wang.dribbble.utils.Utils.checkNotNull;
 
 /**
  * Created by Jack Wang on 2016/6/3.
  */
 public class ShotsRepository implements ShotsDataSource{
-
-    private static ShotsRepository INSTANCE = null;
 
     private final ShotsDataSource mShotsLocalDataSource;
 
@@ -25,22 +25,11 @@ public class ShotsRepository implements ShotsDataSource{
 
     boolean mCacheIsDirty = false;
 
-    private ShotsRepository(@NonNull ShotsDataSource shotsLocalDataSource,
-                           @NonNull ShotsDataSource shotsRemoteDataSource){
+    @Inject
+    ShotsRepository(@Local ShotsDataSource shotsLocalDataSource,
+                           @Remote ShotsDataSource shotsRemoteDataSource){
         mShotsLocalDataSource=shotsLocalDataSource;
         mShotsRemoteDataSource=shotsRemoteDataSource;
-    }
-
-    public static ShotsRepository getInstance(ShotsDataSource shotsLocalDataSource,
-                                              ShotsDataSource shotsRemoteDataSource){
-        if (INSTANCE==null){
-            INSTANCE=new ShotsRepository(shotsLocalDataSource,shotsRemoteDataSource);
-        }
-        return INSTANCE;
-    }
-
-    public static void destroyInstance() {
-        INSTANCE = null;
     }
 
 

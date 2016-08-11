@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Singleton;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,6 +25,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by Jack Wang on 2016/6/3.
  */
+@Singleton
 public class ShotsRemoteDataSource implements ShotsDataSource{
 
     public static final int FILTER_POPULAR=0;
@@ -33,19 +36,9 @@ public class ShotsRemoteDataSource implements ShotsDataSource{
 
     DribbbleService mService;
 
-    private static ShotsDataSource INSTANCE;
-
-    private ShotsRemoteDataSource(){
+    public ShotsRemoteDataSource(){
         mService=RetrofitClient.getInstance().getDRService();
     }
-
-    public static ShotsDataSource getInstance() {
-        if (INSTANCE==null){
-            INSTANCE=new ShotsRemoteDataSource();
-        }
-        return INSTANCE;
-    }
-
 
     @Override
     public void getListShots(int filterId,@NonNull final LoadListShotsCallback callback) {

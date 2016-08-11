@@ -10,12 +10,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.wang.dribbble.Injection;
+import com.wang.dribbble.ApplicationModule;
 import com.wang.dribbble.R;
+import com.wang.dribbble.ShotsRepositoryModule;
 import com.wang.dribbble.data.model.Shots;
 import com.wang.dribbble.data.source.ShotsDataSource;
+import com.wang.dribbble.data.source.ShotsRepository;
 import com.wang.dribbble.module.base.BaseActivity;
 import com.wang.dribbble.utils.ImageSize;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -33,6 +37,11 @@ public class ShotsDetailActivity extends BaseActivity {
     @BindView(R.id.author)
     TextView author;
 
+/*
+    @Inject
+    ShotsRepository shotsRepository;
+*/
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +49,14 @@ public class ShotsDetailActivity extends BaseActivity {
 
         int shotsId = getIntent().getIntExtra("shots_id",0);
 
-        Injection.provideTasksRepository(this).getShots(shotsId, new ShotsDataSource.GetShotsCallback() {
+/*        DaggerShotsRepositoryComponent
+                .builder()
+                .applicationModule(new ApplicationModule(getActivity().getApplicationContext()))
+                .shotsRepositoryModule(new ShotsRepositoryModule())
+                .build()
+                .inject(this);*/
+
+        shotsRepository.getShots(shotsId, new ShotsDataSource.GetShotsCallback() {
             @Override
             public void onShotsLoaded(Shots shots) {
                 collapsingToolbar.setTitle(shots.title);

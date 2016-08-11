@@ -40,7 +40,7 @@ public class ShotsRepositoryTest {
     @Before
     public void init(){
         MockitoAnnotations.initMocks(this);
-        shotsRepository=ShotsRepository.getInstance(shotsLocalDataSource,shotsRemoteDataSource);
+        shotsRepository=new ShotsRepository(shotsLocalDataSource,shotsRemoteDataSource);
     }
 
     @Test

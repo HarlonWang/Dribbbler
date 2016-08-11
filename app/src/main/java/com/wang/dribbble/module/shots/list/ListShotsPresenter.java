@@ -6,6 +6,8 @@ import com.wang.dribbble.data.source.ShotsRepository;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by Jack Wang on 2016/6/3.
  */
@@ -16,6 +18,7 @@ public class ListShotsPresenter implements ListShotsContract.Presenter{
 
     private int page=1;
 
+    @Inject
     public ListShotsPresenter(ShotsRepository shotsRepository,ListShotsContract.View view){
         this.mShotsRepository=shotsRepository;
         this.mView=view;

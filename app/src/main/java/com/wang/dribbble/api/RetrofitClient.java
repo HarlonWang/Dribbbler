@@ -1,6 +1,6 @@
 package com.wang.dribbble.api;
 
-import com.wang.dribbble.Injection;
+import com.wang.dribbble.TokenProvide;
 
 import java.io.IOException;
 
@@ -54,7 +54,7 @@ public class RetrofitClient {
             Request request=chain.request();
             request=request.newBuilder().addHeader("Authorization",new StringBuilder()
                     .append("Bearer ")
-                    .append(Injection.provideTokenValue())
+                    .append(TokenProvide.provideTokenValue())
                     .toString()).build();
             return chain.proceed(request);
         }
