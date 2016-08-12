@@ -12,12 +12,16 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 import com.tumblr.remember.Remember;
+import com.wang.dribbble.inject.ApplicationModule;
+import com.wang.dribbble.inject.DaggerShotsRepositoryComponent;
+import com.wang.dribbble.inject.ShotsRepositoryComponent;
 
 /**
  * Created by Jack Wang on 2016/6/2.
  */
 public class DRApplication extends Application{
 
+    private ShotsRepositoryComponent shotsRepositoryComponent;
 
     @Override
     public void onCreate() {
@@ -60,6 +64,17 @@ public class DRApplication extends Application{
                 return super.placeholder(ctx, tag);
             }
         });
+    }
+
+    public ShotsRepositoryComponent getShotsRepositoryComponent(){
+        if (shotsRepositoryComponent==null){
+            shotsRepositoryComponent= DaggerShotsRepositoryComponent
+                    .builder()
+                    .applicationModule(new ApplicationModule(getApplicationContext()))
+                    .shotsRepositoryModule(new ShotsRepositoryModule())
+                    .build();
+        }
+        return shotsRepositoryComponent;
     }
 
 }

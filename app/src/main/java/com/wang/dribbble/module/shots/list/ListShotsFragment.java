@@ -20,12 +20,9 @@ import com.bumptech.glide.Glide;
 import com.jude.easyrecyclerview.EasyRecyclerView;
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
-import com.wang.dribbble.ApplicationModule;
+import com.wang.dribbble.DRApplication;
 import com.wang.dribbble.R;
-import com.wang.dribbble.ShotsRepositoryModule;
 import com.wang.dribbble.data.model.Shots;
-import com.wang.dribbble.data.source.DaggerShotsRepositoryComponent;
-import com.wang.dribbble.data.source.ShotsRepository;
 import com.wang.dribbble.module.base.BaseFragment;
 import com.wang.dribbble.module.shots.detail.ShotsDetailActivity;
 import com.wang.dribbble.utils.ImageSize;
@@ -59,26 +56,16 @@ public class ListShotsFragment extends BaseFragment implements ListShotsContract
     @Inject
     ListShotsPresenter mPresenter;
 
-    @Inject
-    ShotsRepository shotsRepository;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAdapter=new ListShotsAdapter(getActivity(),new ArrayList<Shots>(0));
-
-        DaggerShotsRepositoryComponent
+        DaggerListShotsComponent
                 .builder()
-                .applicationModule(new ApplicationModule(getActivity().getApplicationContext()))
-                .shotsRepositoryModule(new ShotsRepositoryModule())
+                .shotsRepositoryComponent(((DRApplication)getActivity().getApplication()).getShotsRepositoryComponent())
+                .listShotsPresenterModule(new ListShotsPresenterModule(this))
                 .build()
                 .inject(this);
-
-        /*DaggerListShotsComponent
-                .builder()
-                .listShotsModule(new ListShotsModule(shotsRepository,this))
-                .build()
-                .inject(this);*/
+        mAdapter=new ListShotsAdapter(getActivity(),new ArrayList<Shots>(0));
     }
 
     @Nullable

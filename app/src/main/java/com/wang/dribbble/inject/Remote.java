@@ -1,4 +1,4 @@
-package com.wang.dribbble.data.source;
+package com.wang.dribbble.inject;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -10,5 +10,5 @@ import javax.inject.Qualifier;
  */
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Local {
+public @interface Remote {
 }

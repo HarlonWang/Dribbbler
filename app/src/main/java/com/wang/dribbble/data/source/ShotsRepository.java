@@ -3,6 +3,8 @@ package com.wang.dribbble.data.source;
 import android.support.annotation.NonNull;
 
 import com.wang.dribbble.data.model.Shots;
+import com.wang.dribbble.inject.Local;
+import com.wang.dribbble.inject.Remote;
 
 import java.util.HashMap;
 import java.util.List;
