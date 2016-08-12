@@ -10,7 +10,7 @@ You can check out the different branches for more information .
 
 - [basic/](https://github.com/81813780/Dribbbler/tree/basic) - Basic MVP architecture with Retrofit .
 - [rxjava/](https://github.com/81813780/Dribbbler/tree/rxjava) - Basic MVP architecture with Retrofit , RxJava .
-- rxjava-dagger/ - under development .
+- [rxjava-dagger/](https://github.com/81813780/Dribbbler/tree/rxjava-dagger) - Basic MVP architecture with Retrofit , RxJava , Dagger2 .
 
 ## Screenshots
 
