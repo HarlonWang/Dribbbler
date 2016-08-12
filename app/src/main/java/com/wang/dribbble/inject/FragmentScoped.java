@@ -1,4 +1,4 @@
-package com.wang.dribbble.utils;
+package com.wang.dribbble.inject;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

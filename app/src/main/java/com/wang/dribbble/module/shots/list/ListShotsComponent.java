@@ -1,7 +1,7 @@
 package com.wang.dribbble.module.shots.list;
 
 import com.wang.dribbble.inject.ShotsRepositoryComponent;
-import com.wang.dribbble.utils.FragmentScoped;
+import com.wang.dribbble.inject.FragmentScoped;
 
 
 import dagger.Component;
