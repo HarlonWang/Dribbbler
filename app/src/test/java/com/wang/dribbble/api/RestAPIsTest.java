@@ -10,6 +10,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
+import rx.SingleSubscriber;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,16 +22,32 @@ public class RestAPIsTest {
 
     @Test
     public void shotsTest() throws IOException {
-        Call<List<Shots>> shotsList = RetrofitClient.getInstance().getDRService().getShotsList();
-        Response<List<Shots>> execute = shotsList.execute();
-        assertEquals(12,execute.body().size());
+        RetrofitClient.getInstance().getDRService().getShotsList().subscribe(new SingleSubscriber<List<Shots>>() {
+            @Override
+            public void onSuccess(List<Shots> value) {
+                assertEquals(12,value.size());
+            }
+
+            @Override
+            public void onError(Throwable error) {
+
+            }
+        });
     }
 
     @Test
     public void userTest() throws IOException {
-        Call<User> authenticatedUser = RetrofitClient.getInstance().getDRService().getAuthenticatedUser();
-        Response<User> execute = authenticatedUser.execute();
-        assertEquals("Jack Wang",execute.body().name);
+        RetrofitClient.getInstance().getDRService().getAuthenticatedUser().subscribe(new SingleSubscriber<User>() {
+            @Override
+            public void onSuccess(User value) {
+                assertEquals("Jack Wang",value.name);
+            }
+
+            @Override
+            public void onError(Throwable error) {
+
+            }
+        });
     }
 
 }
