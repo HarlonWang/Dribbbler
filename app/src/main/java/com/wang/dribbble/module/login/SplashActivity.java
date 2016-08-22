@@ -32,8 +32,6 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        showSplashPhoto();
-
         checkToken();
     }
 
@@ -43,6 +41,7 @@ public class SplashActivity extends BaseActivity {
             mLoginBut.setVisibility(View.VISIBLE);
             return;
         }
+        showSplashPhoto();
     }
 
     private void showSplashPhoto() {
